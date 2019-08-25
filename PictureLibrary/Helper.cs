@@ -16,7 +16,11 @@ namespace PictureLibrary
 
        // public ObservableCollection<Picture> allPicsList;
         public static StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-        
+        /// <summary>
+        /// Get pictures from selected album
+        /// </summary>
+        /// <param name="albumName"></param>
+        /// <returns></returns>
         public async Task<IReadOnlyList<Picture>> GetPicturesByAlbum(string albumName)
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
@@ -46,7 +50,10 @@ namespace PictureLibrary
             }
             return allPicsList;
         }
-
+        /// <summary>
+        /// To upload the camera Pic to the storage folder and update the observable collection
+        /// </summary>
+        /// <returns></returns>
         public async Task uploadCameraPic()
         {
             CameraCaptureUI cameraCapture = new CameraCaptureUI();
@@ -55,7 +62,10 @@ namespace PictureLibrary
             await pic.CopyAsync(ApplicationData.Current.LocalFolder, pic.Name, NameCollisionOption.GenerateUniqueName);
 
         }
-
+        /// <summary>
+        /// To get the list of albums to display in the listview
+        /// </summary>
+        /// <returns></returns>
         public async Task GetAllAlbums()
         {
 

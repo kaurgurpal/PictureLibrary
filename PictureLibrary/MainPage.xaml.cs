@@ -140,12 +140,21 @@ namespace PictureLibrary
             var result = await AddAlbumContentDialog.ShowAsync();
 
         }
-
+        /// <summary>
+        /// Button click for add button to add new pictures and create new albums
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppBarToggleButton_Click(object sender, RoutedEventArgs e)
         {
+            //It will show the flyout above add button
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
-
+        /// <summary>
+        /// It will show content dialoge popup to create new album in local state storage folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void AddAlbumContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             try
@@ -159,7 +168,11 @@ namespace PictureLibrary
                 txtError.Text = "Album Name Already Exists!";
             }
         }
-
+        /// <summary>
+        /// It will adjust grid view size to accomodate pictures when user resizes the application 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemsGridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             // Here I'm calculating the number of columns I want based on
@@ -167,7 +180,11 @@ namespace PictureLibrary
             var columns = Math.Ceiling(ActualWidth / 350);
             ((ItemsWrapGrid)itemsGridView.ItemsPanelRoot).ItemWidth = e.NewSize.Width / columns;
         }
-
+        /// <summary>
+        /// Open camera to take selfie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BtnCamera_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -181,14 +198,22 @@ namespace PictureLibrary
                 await new MessageDialog("Error Occurred : " + ex.Message.ToString(), "Error").ShowAsync();
             }
         }
-
+        /// <summary>
+        /// To open the flip view of the images when the image is being tapped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var tb = (Image)e.OriginalSource;
             flipView1.SelectedItem = tb.DataContext;
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
-
+        /// <summary>
+        /// It will add selected images to the list of images to be deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChkSelect_Click(object sender, RoutedEventArgs e)
         {
             var chktb = (CheckBox)e.OriginalSource;
@@ -202,7 +227,11 @@ namespace PictureLibrary
                 lstDelete.Remove(dataCxtx);
             }
         }
-
+        /// <summary>
+        /// Delete pictures from the list and update the observable collection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BtnDelete_ClickAsync(object sender, RoutedEventArgs e)
         {
             foreach (var item in lstDelete.ToList())
